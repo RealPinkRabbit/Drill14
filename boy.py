@@ -277,6 +277,7 @@ class Boy:
         self.state_machine = StateMachine(self)
         self.state_machine.start()
         self.x, self.y = server.background.w // 2, server.background.h // 2
+        self.sx, self.sy = 0, 0
 
     def set_background(self, bg):
         # fill here
@@ -293,15 +294,17 @@ class Boy:
     def draw(self):
         # fill here
         # sx, sy = get_canvas_width() // 2, get_canvas_height() // 2
-        sx = self.x - server.background.window_left
-        sy = self.y - server.background.window_bottom
+        self.sx = self.x - server.background.window_left
+        self.sy = self.y - server.background.window_bottom
         # 소년을 화면 한 가운데에 그림
-        self.image.clip_draw(int(self.frame)*100, self.action*100, 100, 100, sx, sy)
+        self.image.clip_draw(int(self.frame)*100, self.action*100, 100, 100, self.sx, self.sy)
         pass
 
     def get_bb(self):
-        return self.x - 20, self.y - 50, self.x + 20, self.y + 50
+        return self.sx - 20, self.sy - 50, self.sx + 20, self.sy + 50
 
     # fill here
     def handle_collision(self, group, other):
+        if group == 'boy:ball':
+            pass
         pass
